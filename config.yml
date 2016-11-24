@@ -1,0 +1,45 @@
+modules:
+  fancyname:
+    enabled: true
+  lore:
+    enabled: true
+  giftitem:
+    enabled: true
+    messages:
+      anonymous: '&aYou have received a gift!'
+      normal: '&aYou have received a gift from %s!'
+  racemode:
+    enabled: true
+    maxlevel: 10
+    regenpersecond: 0.34
+    penaltytime: 10
+    penaltystrength: 2
+    sendmessageonpenalty: true
+    messageonpenalty: "&6&oYou are slowed down for &l%d seconds&r&6&o because you jumped too much!&r&o Watch your experience level: If you jump while at level 0, you will be slowed down again!"
+  itemnope:
+    enabled: true
+    projectile:
+      worldspawn_bypasses_restriction: false
+      npc_bypasses_restriction: true
+      names:
+        - splash_potion
+        - fireball
+        - small_fireball
+        - thrown_exp_bottle
+        - lingering_potion
+  xpblocker:
+    enabled: true
+  mounting:
+    enabled: true
+  light:
+    enabled: true
+  misccommands:
+    enabled: true
+  cancelledchat:
+    enabled: true
+  firstjoined:
+    enabled: true
+    to: equestria5
+    from: core
+  blockpotions:
+    enabled: true

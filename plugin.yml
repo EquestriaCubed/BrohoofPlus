@@ -1,0 +1,177 @@
+name: BrohoofPlus
+author: SweetieBelle
+authors: [Hepolite, JoyJoy, Ha3]
+main: com.brohoof.brohoofplus.bukkit.BrohoofPlusPlugin
+softdepend: [Herochat, LightAPI, WorldEdit]
+version: 19
+description: >
+            General functionality for brohoof stuff that doesn't seem
+            big enough to have it's own plugin, but would be nice to 
+            have anyway.
+commands:
+    BrohoofPlus:
+        description: Core command
+        permission: brohoofplus.admin
+        usage: /<command> <params>
+    lore_add:
+        description: add lore line
+        permission: lore.add
+        usage: lore_add
+    lore_name:
+        description: name item
+        permission: lore.name
+        usage: lore_name
+    lore_reset:
+        description: reset lore
+        permission: lore.reset
+        usage: lore_reset
+    lore_repair:
+        description: repair item
+        permission: lore.repair
+        usage: lore_repair
+    lore_color:
+        description: color item
+        permission: lore.color
+        usage: lore_color
+    giftitem:
+        description: Gifts the currently held item to player or * for all
+        permission: giftitem.admin
+        usage: giftitem (<player> | *) [quiet anonymous]
+    giftunique:
+        description: Gifts the currently held item to player or * for all only if the player doesn't have it already
+        permission: giftitem.admin
+        usage: giftunique (<player> | *) [quiet anonymous]
+    copyitem:
+        description: Copies the item to yourself
+        permission: giftitem.admin
+        usage: copyitem <number>
+    fly:
+      description: Toggles flight. You mean people don't want to fly? Assholes
+      usage: /fly
+      permission: fuckflight.fly
+    racemode:
+        description: Commands RaceMode [start|stop|debug|reload]
+        permission: racemode.admin
+        usage: racemode [start|stop|debug|reload]
+    enchant:
+      description: Adds a enchant to your current item, or the current item of a player
+      usage: /enchant <player> <enchant> <level>
+      permission: brohoofplus.enchant
+    mount:
+      description: Look at a player to mount them!
+      usage: /mount
+    mounttoggle:
+      description: Toggles if you can be mounted or not.
+      usage: /mounttoggle allow | deny
+    unmount:
+      description: Unmounts whoever you are riding, and wheover is riding you.
+      usage: /unmount
+    exploit:
+      description: Runs when someone calls an exploit command.
+      usage: /exploit
+    unreg:
+      description: Unregisters a player.
+      usage: /unreg <playername>
+    grey:
+      description: Unregisters a player.
+      usage: /grey <playername>
+    greyname:
+      description: Unregisters a player.
+      usage: /greyname <playername>
+    freebuilder:
+      description: Promotes a player to freebuilder.
+      usage: /freebuilder <playername>
+    cmc:
+      description: Promotes a player to cmc.
+      usage: /cmc <playername>
+    builder:
+      description: Promotes a player to builder.
+      usage: /builder <playername>
+    builderb:
+      description: Promotes a player to builder from brohoof.
+      usage: /builderb <playername>
+    savebuilder:
+      description: Saves a submission house and approved the candidate.
+      usage: /savebuilder <playername>
+    improve:
+      description: Repromotes a player to cmc so they can improve their house.
+      usage: /improve <playername>
+    savereject:
+      description: Saves a submission house and approved the candidate.
+      usage: /savereject <playername>
+    saveclean:
+      description: Saves a submission house and approved the candidate.
+      usage: /saveclean <playername>
+    '/save':
+      description: Saves a WorldEdit schematic.
+      usage: //save <schematic>
+    '/load':
+      description: Loads a WorldEdit schematic.
+      usage: //load <schematic>
+    status:
+      description: Displays information about a user.
+      usage: /status <playername|UUID>
+    lookup:
+      description: Lists accounts associated with an IP address.
+      usage: /lookup ([-i] <IP>|<playername|UUID>)
+    suspend:
+      description: Suspends a player. Remeber to make a post about it!
+      usage: /suspend <playername> <reason...>
+    lookup2:
+      description: Lists alls IP of a player.
+      usage: /lookup2 <playername|UUID>
+    head:
+      description: Gives you a player head based on the name.
+      usage: /head <playername>
+    lightcreate:
+      description: Adds light
+      usage: /lightcreate x y z
+    lightdelete:
+      description: Removes light
+      usage: /lightdelete x y z
+    lightcreatelevel:
+      description: Adds light
+      usage: /lightcreatelevel x y z level
+    lightregion:
+      descrption: Adds or removes light from a region
+      usage: /lightregion (create|delete) level
+    lightdebug:
+      descrption: Toggles debug
+      usage: /lightdebug (true|false)
+permissions:
+    brohoofplus.admin:
+      description: Allows usage of /BrohoofPlus
+      default: op
+    brohoofplus.enchant:
+      description: Allows usage of /enchant
+      default: op
+    light.use:
+      description: Allows usage
+      default: op
+    payday.use:
+      description: Allows usage
+      default: op
+    fuckflight.fly:
+      description: Allows /fly
+      default: true
+    giftitem.admin:
+        description: GiftItem admin
+        default: op
+    lore.add:
+        description: lore add lore
+        default: op
+    lore.name:
+        description: lore name item
+        default: op
+    lore.reset:
+        description: lore reset lore
+        default: op
+    lore.repair:
+        description: lore repair item
+        default: op
+    lore.color:
+        description: lore color item
+        default: op
+    racemode.admin:
+        description: RaceMode admin
+        default: op
