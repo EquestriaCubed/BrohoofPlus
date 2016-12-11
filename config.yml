@@ -1,5 +1,5 @@
 modules:
-  fancyname:
+  herochatfancyname:
     enabled: true
   lore:
     enabled: true
@@ -29,11 +29,11 @@ modules:
         - lingering_potion
   xpblocker:
     enabled: true
-  mounting:
+  mount:
     enabled: true
   light:
     enabled: true
-  misccommands:
+  enchant:
     enabled: true
   cancelledchat:
     enabled: true
@@ -41,5 +41,7 @@ modules:
     enabled: true
     to: equestria5
     from: core
-  blockpotions:
+  blockpotionsandarrows:
+    enabled: true
+  flight:
     enabled: true

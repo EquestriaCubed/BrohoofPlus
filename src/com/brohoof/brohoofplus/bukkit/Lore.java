@@ -7,7 +7,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,11 +15,10 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import com.google.common.base.Joiner;
 
-class Lore implements CommandExecutor {
-    private final BrohoofPlusPlugin plugin;
+public class Lore extends Module {
 
-    Lore(final BrohoofPlusPlugin p) {
-        plugin = p;
+    public Lore(final BrohoofPlusPlugin p) {
+    	super(p, "lore_add", "lore_name", "lore_reset", "lore_repair", "lore_color");
     }
 
     @Override
@@ -92,6 +90,6 @@ class Lore implements CommandExecutor {
     }
 
     private ItemMeta ensureMeta(final ItemStack item) {
-        return item.hasItemMeta() ? item.getItemMeta() : plugin.getServer().getItemFactory().getItemMeta(item.getType());
+        return item.hasItemMeta() ? item.getItemMeta() : p.getServer().getItemFactory().getItemMeta(item.getType());
     }
 }

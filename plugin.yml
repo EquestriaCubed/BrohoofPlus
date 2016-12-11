@@ -3,7 +3,7 @@ author: SweetieBelle
 authors: [Hepolite, JoyJoy, Ha3]
 main: com.brohoof.brohoofplus.bukkit.BrohoofPlusPlugin
 softdepend: [Herochat, LightAPI, WorldEdit]
-version: 19
+version: 20
 description: >
             General functionality for brohoof stuff that doesn't seem
             big enough to have it's own plugin, but would be nice to 
@@ -11,6 +11,10 @@ description: >
 commands:
     BrohoofPlus:
         description: Core command
+        permission: brohoofplus.admin
+        usage: /<command> <params>
+    fancyname:
+        description: Makes your name fancy!
         permission: brohoofplus.admin
         usage: /<command> <params>
     lore_add:
@@ -144,6 +148,9 @@ permissions:
       default: op
     brohoofplus.enchant:
       description: Allows usage of /enchant
+      default: op
+    brohoofplus.bypasspotions:
+      description: Allows usage of potions and other items.
       default: op
     light.use:
       description: Allows usage

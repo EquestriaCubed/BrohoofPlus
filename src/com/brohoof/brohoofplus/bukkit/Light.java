@@ -3,7 +3,6 @@ package com.brohoof.brohoofplus.bukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,8 +20,9 @@ import ru.beykerykt.lightapi.LightAPI;
 /**
  * Great plugin, but the asshole keeps changing the API.
  */
-class Light implements CommandExecutor {
-    Light(final BrohoofPlusPlugin plugin) {
+public class Light extends Module {
+    public Light(final BrohoofPlusPlugin plugin) {
+    	super(plugin, "lightcreate", "lightdelete", "lightcreatelevel", "lightregion", "lightdebug");
         try {
             LightAPI.getInstance().isEnabled();
         } catch (NoClassDefFoundError e) {
