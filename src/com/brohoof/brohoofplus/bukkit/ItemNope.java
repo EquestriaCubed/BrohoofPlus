@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 
-class ItemNope extends Module {
+public class ItemNope extends Module {
 	private final List<String> projectile_names;
 	private final List<String> tracer;
 

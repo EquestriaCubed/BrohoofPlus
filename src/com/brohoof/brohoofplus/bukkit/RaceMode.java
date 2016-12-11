@@ -16,7 +16,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-class RaceMode extends Module {
+public class RaceMode extends Module {
 	private boolean isActive;
 	private World activeWorld;
 	private int maxLevel;

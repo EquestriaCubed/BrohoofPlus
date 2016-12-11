@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 
-class Mount extends Module {
+public class Mount extends Module {
 
 	public Mount(final BrohoofPlusPlugin brohoofPlusPlugin) {
 		super(brohoofPlusPlugin, "mount", "unmount", "mounttoggle");
@@ -156,7 +156,7 @@ class Mount extends Module {
 			this.id = id;
 		}
 
-		private int getID() {
+		public int getID() {
 			return id;
 		}
 
