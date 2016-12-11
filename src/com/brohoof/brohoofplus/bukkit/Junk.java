@@ -15,8 +15,10 @@ import org.bukkit.inventory.ItemStack;
 import com.google.common.base.Joiner;
 
 class Junk implements CommandExecutor {
-    private final String BHP = "§c[§6B§er§ao§3h§9o§5o§cf§6P§el§au§3s§9] §f";
-    private static BrohoofPlusPlugin p;
+    @SuppressWarnings("unused")
+	private final String BHP = "§c[§6B§er§ao§3h§9o§5o§cf§6P§el§au§3s§9] §f";
+    @SuppressWarnings("unused")
+	private static BrohoofPlusPlugin p;
 
     @SuppressWarnings("static-access")
     Junk(final BrohoofPlusPlugin p) {

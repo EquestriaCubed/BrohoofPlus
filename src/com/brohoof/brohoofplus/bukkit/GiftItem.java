@@ -57,10 +57,13 @@ class GiftItem implements CommandExecutor {
                 targetPlayerName = pArgs[0];
                 switch (pArgs[1]) {
                     case "anonymous": {
-                        anonymous = true;
+						anonymous = true;
+						break;
                     }
-                    case "quiet": {
+						
+					case "quiet": {
                         quiet = true;
+                        break;
                     }
                 }
                 break;
