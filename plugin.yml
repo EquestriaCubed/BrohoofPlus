@@ -3,7 +3,7 @@ author: SweetieBelle
 authors: [Hepolite, JoyJoy, Ha3]
 main: com.brohoof.brohoofplus.bukkit.BrohoofPlusPlugin
 softdepend: [Herochat, LightAPI, WorldEdit]
-version: 20
+version: 21
 description: >
             General functionality for brohoof stuff that doesn't seem
             big enough to have it's own plugin, but would be nice to 
@@ -141,7 +141,7 @@ commands:
       usage: /lightregion (create|delete) level
     lightdebug:
       descrption: Toggles debug
-      usage: /lightdebug (true|false)
+      usage: /lightdebug
 permissions:
     brohoofplus.admin:
       description: Allows usage of /BrohoofPlus
