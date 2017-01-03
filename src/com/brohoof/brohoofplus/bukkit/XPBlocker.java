@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockExpEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExpBottleEvent;
@@ -13,7 +14,11 @@ import org.bukkit.event.player.PlayerFishEvent;
 public class XPBlocker extends Module {
 	public XPBlocker(BrohoofPlusPlugin p) {
 		super(p);
-		listener = new XPBlockerEvents();
+	}
+
+	@Override
+	public Listener createListener() {
+		return new XPBlockerEvents();
 	}
 
 	@Override
@@ -22,7 +27,7 @@ public class XPBlocker extends Module {
 		return false;
 	}
 
-	public class XPBlockerEvents extends ModuleListener {
+	public class XPBlockerEvents implements Listener {
 		@EventHandler(priority = EventPriority.LOWEST)
 		public void onBlockExp(final BlockExpEvent event) {
 			event.setExpToDrop(0);

@@ -45,3 +45,5 @@ modules:
     enabled: true
   flight:
     enabled: true
+  infiniteitem:
+    enabled: true

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.LingeringPotionSplashEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
@@ -14,8 +15,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class BlockPotionsAndArrows extends Module {
 	public BlockPotionsAndArrows(BrohoofPlusPlugin p) {
 		super(p);
-		listener = new BlockPotionsndArrowsListener();
-		p.getServer().getPluginManager().registerEvents(listener, p);
+	}
+
+	@Override
+	protected Listener createListener() {
+		return new BlockPotionsndArrowsListener();
 	}
 
 	@Override
@@ -24,7 +28,8 @@ public class BlockPotionsAndArrows extends Module {
 		return false;
 	}
 
-	public class BlockPotionsndArrowsListener extends ModuleListener {
+	public class BlockPotionsndArrowsListener implements Listener {
+
 		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
 		public void onPotionSplashEvent(PotionSplashEvent e) {
 			e.setCancelled(true);

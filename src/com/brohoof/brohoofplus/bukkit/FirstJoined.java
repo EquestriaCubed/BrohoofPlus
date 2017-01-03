@@ -6,13 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class FirstJoined extends Module {
 
 	public FirstJoined(final BrohoofPlusPlugin plugin) {
 		super(plugin);
-		listener = new FirstJoinedListener();
+	}
+
+	@Override
+	protected Listener createListener() {
+		return new FirstJoinedListener();
 	}
 
 	@Override
@@ -21,10 +26,10 @@ public class FirstJoined extends Module {
 		return false;
 	}
 
-	public class FirstJoinedListener extends ModuleListener {
+	public class FirstJoinedListener implements Listener {
 		@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
 		public void playerWorldChange(PlayerTeleportEvent e) {
-			if (e.getFrom().getWorld().getName().equals(p.getConfig().getString("modules.firstjoined.from")) && e.getTo().getWorld().getName().equals(p.getConfig().getString("modules.firstjoined.to"))) {
+			if (e.getFrom().getWorld().getName().equals(plugin.getConfig().getString("modules.firstjoined.from")) && e.getTo().getWorld().getName().equals(plugin.getConfig().getString("modules.firstjoined.to"))) {
 				Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " has joined for the first time!");
 			}
 		}

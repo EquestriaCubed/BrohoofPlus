@@ -5,13 +5,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Flight extends Module {
 
 	public Flight(BrohoofPlusPlugin p) {
 		super(p, "fly");
-		listener = new FlightListener();
+	}
+
+	@Override
+	protected Listener createListener() {
+		return new FlightListener();
 	}
 
 	@Override
@@ -26,7 +31,7 @@ public class Flight extends Module {
 		return true;
 	}
 	
-	public class FlightListener extends ModuleListener {
+	public class FlightListener implements Listener {
         @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
         public void playerJoin(PlayerJoinEvent p) {
             p.getPlayer().setAllowFlight(true);

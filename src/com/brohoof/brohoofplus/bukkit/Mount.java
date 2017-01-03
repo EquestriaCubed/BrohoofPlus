@@ -1,8 +1,6 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.io.File;
-import java.io.IOException;
-
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,16 +10,22 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.md_5.bungee.api.ChatColor;
+import java.io.File;
+import java.io.IOException;
 
 public class Mount extends Module {
 
 	public Mount(final BrohoofPlusPlugin brohoofPlusPlugin) {
 		super(brohoofPlusPlugin, "mount", "unmount", "mounttoggle");
-		listener = new MountEvent();
+	}
+
+	@Override
+	public Listener createListener() {
+		return new MountEvent();
 	}
 
 	@Override
@@ -38,7 +42,7 @@ public class Mount extends Module {
 		}
 		if (command.getName().equalsIgnoreCase("mounttoggle")) {
 			try {
-				File mountFile = new File(p.getDataFolder(), "mountpref.yml");
+				File mountFile = new File(plugin.getDataFolder(), "mountpref.yml");
 				if (!mountFile.exists()) {
 					mountFile.createNewFile();
 				}
@@ -68,7 +72,7 @@ public class Mount extends Module {
 				return true;
 			} catch (IOException e) {
 				e.printStackTrace();
-				pSender.sendMessage(BrohoofPlusPlugin.BHP + "§cAn internal error occured. Please contact an admin.");
+				pSender.sendMessage(BrohoofPlusPlugin.BHP + "ï¿½cAn internal error occured. Please contact an admin.");
 				return true;
 			}
 		}
@@ -88,7 +92,7 @@ public class Mount extends Module {
 		return false;
 	}
 
-	public class MountEvent extends ModuleListener {
+	public class MountEvent implements Listener {
 		@SuppressWarnings("deprecation")
 		@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 		public void onMountEvent(final PlayerInteractEntityEvent pEvent) {
@@ -104,13 +108,13 @@ public class Mount extends Module {
 					break;
 			}
 			if (clicker.getInventory().getItemInMainHand().getType().equals(Material.SADDLE)) {
-				final Status targetStatus = Status.fromInt(p.getConfig("mountpref.yml").getInt("mountpref." + clicked.getUniqueId().toString() + ".status"));
+				final Status targetStatus = Status.fromInt(plugin.getConfig("mountpref.yml").getInt("mountpref." + clicked.getUniqueId().toString() + ".status"));
 				if (targetStatus == null || targetStatus == Status.ALLOWED) {
 					if (clicked.getPassenger() == null) {
 						if (clicked instanceof Player)
-							p.getLogger().info(clicker.getName() + " mounted " + ((Player) clicked).getName());
+							plugin.getLogger().info(clicker.getName() + " mounted " + ((Player) clicked).getName());
 						else
-							p.getLogger().info(clicker.getName() + " mounted a " + clicked.getType().getName());
+							plugin.getLogger().info(clicker.getName() + " mounted a " + clicked.getType().getName());
 						// clicked.setPassenger(clicker);
 						boolean success = false;
 						String errorPrefix = BrohoofPlusPlugin.BHP + ChatColor.RED;
