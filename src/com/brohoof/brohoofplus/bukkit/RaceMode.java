@@ -1,8 +1,5 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -12,9 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RaceMode extends Module {
 	private boolean isActive;
@@ -32,8 +33,12 @@ public class RaceMode extends Module {
 
 	public RaceMode(final BrohoofPlusPlugin p) {
 		super(p, "racemode");
-		jumpFlags = new HashMap<Player, Boolean>();
-		listener = new RaceEvents();
+		jumpFlags = new HashMap<>();
+	}
+
+	@Override
+	protected Listener createListener() {
+		return new RaceEvents();
 	}
 
 	private void setDebugMode(final boolean enabled) {
@@ -75,8 +80,8 @@ public class RaceMode extends Module {
 	private void deactivate() {
 		if (!isActive)
 			return;
-		p.getServer().getScheduler().cancelTask(taskID);
-		for (final Player ply : p.getServer().getOnlinePlayers()) {
+		plugin.getServer().getScheduler().cancelTask(taskID);
+		for (final Player ply : plugin.getServer().getOnlinePlayers()) {
 			ply.setExp(0f);
 			ply.setLevel(0);
 			ply.removePotionEffect(PotionEffectType.SLOW);
@@ -91,26 +96,26 @@ public class RaceMode extends Module {
 		activeWorld = world;
 		isActive = true;
 		jumpFlags.clear();
-		maxLevel = p.getConfig().getInt("modules.racemode.maxlevel");
+		maxLevel = plugin.getConfig().getInt("modules.racemode.maxlevel");
 		// Keep those instruction grouped in order!
-		regenPerSecond = (float) p.getConfig().getDouble("modules.racemode.regenpersecond");
+		regenPerSecond = (float) plugin.getConfig().getDouble("modules.racemode.regenpersecond");
 		levelPerSecond = (int) Math.floor(regenPerSecond);
 		regenPerSecond = regenPerSecond - levelPerSecond;
 		//
-		penaltyTime = p.getConfig().getInt("modules.racemode.penaltytime");
-		penaltyStrength = p.getConfig().getInt("modules.racemode.penaltystrength");
-		showMessageOnPenalty = p.getConfig().getBoolean("modules.racemode.sendmessageonpenalty");
-		messageOnPenalty = p.getConfig().getString("modules.racemode.messageonpenalty").replace('&', '§');
-		for (final Player ply : p.getServer().getOnlinePlayers()) {
+		penaltyTime = plugin.getConfig().getInt("modules.racemode.penaltytime");
+		penaltyStrength = plugin.getConfig().getInt("modules.racemode.penaltystrength");
+		showMessageOnPenalty = plugin.getConfig().getBoolean("modules.racemode.sendmessageonpenalty");
+		messageOnPenalty = plugin.getConfig().getString("modules.racemode.messageonpenalty").replace('&', 'ï¿½');
+		for (final Player ply : plugin.getServer().getOnlinePlayers()) {
 			ply.setExp(0f);
 			ply.setLevel(maxLevel);
 		}
-		p.getServer().broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Race mode: Started! (World:" + activeWorld.getName() + ")");
+		plugin.getServer().broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Race mode: Started! (World:" + activeWorld.getName() + ")");
 		// getServer().broadcastMessage(ChatColor.ITALIC + " Jumping decreases XP by 1 level (full bar).");
-		p.getServer().broadcastMessage(ChatColor.ITALIC + "  When you jump, you lose 1 XP level.");
-		p.getServer().broadcastMessage(ChatColor.ITALIC + "  XP regenerates at " + String.format("%.2f", regenPerSecond) + " level per second to a maximum of " + maxLevel + ".");
-		p.getServer().broadcastMessage(ChatColor.ITALIC + "  When you jump while your XP level is 0, you gain Slowness (" + (penaltyStrength + 1) + ") for " + penaltyTime + " seconds, and your XP level is reset to " + maxLevel + ".");
-		taskID = p.getServer().getScheduler().scheduleSyncRepeatingTask(p, () -> {
+		plugin.getServer().broadcastMessage(ChatColor.ITALIC + "  When you jump, you lose 1 XP level.");
+		plugin.getServer().broadcastMessage(ChatColor.ITALIC + "  XP regenerates at " + String.format("%.2f", regenPerSecond) + " level per second to a maximum of " + maxLevel + ".");
+		plugin.getServer().broadcastMessage(ChatColor.ITALIC + "  When you jump while your XP level is 0, you gain Slowness (" + (penaltyStrength + 1) + ") for " + penaltyTime + " seconds, and your XP level is reset to " + maxLevel + ".");
+		taskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
 			if (!isActive)
 				return;
 			for (final Player ply : activeWorld.getPlayers())
@@ -143,7 +148,7 @@ public class RaceMode extends Module {
 		isActive = true;
 	}
 
-	public class RaceEvents extends ModuleListener {
+	public class RaceEvents implements Listener {
 		@EventHandler
 		public void onPlayerMove(final PlayerMoveEvent e) {
 			if (!isActive)
@@ -156,10 +161,10 @@ public class RaceMode extends Module {
 			if (e.getFrom().getY() < e.getTo().getY()) {
 				if (ply.getLocation().getBlock().isLiquid()) {
 					if (isDebugEnabled())
-						p.getLogger().info("Player " + ply.getName() + " -> in liquid");
+						plugin.getLogger().info("Player " + ply.getName() + " -> in liquid");
 				} else if (e.getTo().getY() - e.getFrom().getY() == 0.5d) {
 					if (isDebugEnabled())
-						p.getLogger().info("Player " + ply.getName() + " -> half slab");
+						plugin.getLogger().info("Player " + ply.getName() + " -> half slab");
 				} else if (jumpFlags.get(ply) == false) {
 					playerJumpEvent(e, false);
 					jumpFlags.put(ply, true);
@@ -173,7 +178,7 @@ public class RaceMode extends Module {
 			if (ply.getGameMode() == GameMode.CREATIVE)
 				return;
 			if (isDebugEnabled())
-				p.getLogger().info("Player " + ply.getName() + " -> jump");
+				plugin.getLogger().info("Player " + ply.getName() + " -> jump");
 			final int level = ply.getLevel();
 			if (level <= 0)
 				triggerPenalty(ply);
@@ -182,7 +187,7 @@ public class RaceMode extends Module {
 		}
 
 		private void triggerPenalty(final Player ply) {
-			p.getLogger().info(ply.getName() + " got a penalty");
+			plugin.getLogger().info(ply.getName() + " got a penalty");
 			ply.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, penaltyTime * 20, penaltyStrength));
 			ply.setExp(0f);
 			ply.setLevel(maxLevel);

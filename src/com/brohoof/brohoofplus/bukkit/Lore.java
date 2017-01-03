@@ -1,8 +1,6 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.base.Joiner;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -13,7 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import com.google.common.base.Joiner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lore extends Module {
 
@@ -90,6 +89,6 @@ public class Lore extends Module {
     }
 
     private ItemMeta ensureMeta(final ItemStack item) {
-        return item.hasItemMeta() ? item.getItemMeta() : p.getServer().getItemFactory().getItemMeta(item.getType());
+        return item.hasItemMeta() ? item.getItemMeta() : plugin.getServer().getItemFactory().getItemMeta(item.getType());
     }
 }

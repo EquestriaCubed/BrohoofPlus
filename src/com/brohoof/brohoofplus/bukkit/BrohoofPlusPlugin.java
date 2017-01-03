@@ -1,8 +1,6 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.io.File;
-import java.util.HashSet;
-
+import com.google.common.collect.Iterators;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,31 +9,21 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class BrohoofPlusPlugin extends JavaPlugin {
-	public static final String BHP = ChatColor.RED + "[" + ChatColor.GOLD + "B" + ChatColor.YELLOW + "r" + ChatColor.GREEN + "o" + ChatColor.DARK_AQUA + "h" + ChatColor.BLUE + "o" + ChatColor.DARK_PURPLE + "o" + ChatColor.RED + "f" + ChatColor.GOLD + "P" + ChatColor.YELLOW + "l" + ChatColor.GREEN + "u" + ChatColor.DARK_AQUA + "s" + ChatColor.BLUE + "] " + ChatColor.WHITE;
+import java.io.File;
+import java.util.Iterator;
 
-	private final HashSet<Class<? extends Module>> modules = new HashSet<Class<? extends Module>>(0);
+import static org.bukkit.ChatColor.*;
+
+public class BrohoofPlusPlugin extends JavaPlugin {
+
+	public static final String BHP = rainbowify("[BrohoofPlus]");
 
 	@Override
 	public void onEnable() {
-		modules.add(BlockPotionsAndArrows.class);
-		modules.add(HerochatFancyname.class);
-		modules.add(CancelledChat.class);
-		modules.add(FirstJoined.class);
-		modules.add(GiftItem.class);
-		modules.add(HerochatFancyname.class);
-		modules.add(ItemNope.class);
-		modules.add(Light.class);
-		modules.add(Lore.class);
-		modules.add(Mount.class);
-		modules.add(RaceMode.class);
-		modules.add(XPBlocker.class);
-		modules.add(Flight.class);
-		modules.add(Enchant.class);
 		try {
-			for (Class<? extends Module> module : modules) {
-				if (getConfig().getBoolean("modules." + module.getSimpleName().toLowerCase() + ".enabled"))
-					module.getConstructor(BrohoofPlusPlugin.class).newInstance(this);
+			for (Modules module : Modules.values()) {
+				if (getConfig().getBoolean("modules." + module + ".enabled"))
+					module.getConstructor().apply(this);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,4 +61,14 @@ public class BrohoofPlusPlugin extends JavaPlugin {
 			return true;
 		return false;
 	}
+
+	private static String rainbowify(String string) {
+
+        Iterator<ChatColor> cycle = Iterators.cycle(RED, GOLD, YELLOW, GREEN, DARK_AQUA, BLUE, DARK_PURPLE);
+        StringBuilder sb = new StringBuilder();
+        for (char c : string.toCharArray()) {
+            sb.append(cycle.next()).append(c);
+        }
+        return sb.append(WHITE).toString();
+    }
 }

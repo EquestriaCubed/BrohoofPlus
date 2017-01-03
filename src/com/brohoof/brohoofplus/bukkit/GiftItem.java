@@ -1,13 +1,14 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class GiftItem extends Module {
 
@@ -81,13 +82,13 @@ public class GiftItem extends Module {
             receipients.addAll(Bukkit.getOnlinePlayers());
             receipients.remove(pSender);
             pSender.sendMessage("Sending gift to all players...");
-            p.getLogger().info(pSender.getName() + " is sending a gift to all players (" + item.getType().toString() + ")");
+            plugin.getLogger().info(pSender.getName() + " is sending a gift to all players (" + item.getType().toString() + ")");
         } else
             for (final Player p : Bukkit.getOnlinePlayers()) {
                 if (p.getName().toLowerCase().equalsIgnoreCase(targetPlayerName)) {
                     receipients.add(p);
                     pSender.sendMessage("Sending gift to " + p.getName() + "...");
-                    this.p.getLogger().info(pSender.getName() + " is sending a gift to " + p.getName() + " (" + item.getType().toString() + ")");
+                    this.plugin.getLogger().info(pSender.getName() + " is sending a gift to " + p.getName() + " (" + item.getType().toString() + ")");
                     break;
                 }
 
@@ -98,10 +99,10 @@ public class GiftItem extends Module {
         }
         if (quiet) {
             pSender.sendMessage("Sending silently...");
-            p.getLogger().info("This gift is sent silently (no message)");
+            plugin.getLogger().info("This gift is sent silently (no message)");
         } else if (anonymous) {
             pSender.sendMessage("Sending anonymously...");
-            p.getLogger().info("This gift is sent anonymously (no sender name)");
+            plugin.getLogger().info("This gift is sent anonymously (no sender name)");
         } else
             pSender.sendMessage("Sending with your name...");
         final boolean unique = command.getName().equalsIgnoreCase("giftunique");
@@ -114,9 +115,9 @@ public class GiftItem extends Module {
                 receiver.getInventory().addItem(item);
                 if (!quiet)
                     if (anonymous)
-                        receiver.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(p.getConfig().getString("modules.giftitem.messages.anonymous"))));
+                        receiver.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(plugin.getConfig().getString("modules.giftitem.messages.anonymous"))));
                     else
-                        receiver.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(p.getConfig().getString("modules.giftitem.messages.normal"), pSender.getName())));
+                        receiver.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(plugin.getConfig().getString("modules.giftitem.messages.normal"), pSender.getName())));
             }
         }
         return true;

@@ -1,7 +1,7 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.util.HashMap;
-
+import com.dthielke.Herochat;
+import com.dthielke.api.event.ChannelChatEvent;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,16 +9,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 
-import com.dthielke.Herochat;
-import com.dthielke.api.event.ChannelChatEvent;
+import java.util.HashMap;
 
 public class HerochatFancyname extends Module {
 	private final HashMap<Player, String> enabledUsers = new HashMap<Player, String>(256);
 
 	public HerochatFancyname(final BrohoofPlusPlugin p) {
 		super(p, "fancyname");
-		listener = new HerochatFancynameListener();
+	}
+
+	@Override
+	protected Listener createListener() {
+		return new HerochatFancynameListener();
 	}
 
 	private void add(final Player p, final String nick) {
@@ -68,7 +72,7 @@ public class HerochatFancyname extends Module {
 
 	}
 
-	public class HerochatFancynameListener extends ModuleListener {
+	public class HerochatFancynameListener implements Listener {
 		@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 		public void onHeroChatMessage(final ChannelChatEvent event) {
 			final Player player = event.getChatter().getPlayer();

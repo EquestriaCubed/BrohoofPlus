@@ -1,15 +1,16 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemNope extends Module {
 	private final List<String> projectile_names;
@@ -17,11 +18,15 @@ public class ItemNope extends Module {
 
 	public ItemNope(final BrohoofPlusPlugin p) {
 		super(p);
-		projectile_names = new ArrayList<String>();
-		tracer = new ArrayList<String>();
+		projectile_names = new ArrayList<>();
+		tracer = new ArrayList<>();
 		for (final String name : p.getConfig().getStringList("modules.itemnope.projectile.names"))
 			projectile_names.add(name.toLowerCase());
-		listener = new ItemNopeListener();
+	}
+
+	@Override
+	public Listener createListener() {
+		return new ItemNopeListener();
 	}
 
 	@Override
@@ -30,7 +35,7 @@ public class ItemNope extends Module {
 		return false;
 	}
 
-	public class ItemNopeListener extends ModuleListener {
+	public class ItemNopeListener implements Listener {
 		@SuppressWarnings("deprecation")
 		@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 		public void projectileLaunchEvent(final ProjectileLaunchEvent event) {
@@ -44,12 +49,12 @@ public class ItemNope extends Module {
 					shooter = (LivingEntity) event.getEntity().getShooter();
 				// Worldspawn (Dispenser or something that is not living)
 				if (shooter == null) {
-					if (!p.getConfig().getBoolean("modules.itemnope.projectile.worldspawn_bypasses_restriction"))
+					if (!plugin.getConfig().getBoolean("modules.itemnope.projectile.worldspawn_bypasses_restriction"))
 						event.setCancelled(true);
 				}
 				// NPC
 				else if (!(shooter instanceof Player)) {
-					if (!p.getConfig().getBoolean("modules.itemnope.projectile.npc_bypasses_restriction"))
+					if (!plugin.getConfig().getBoolean("modules.itemnope.projectile.npc_bypasses_restriction"))
 						event.setCancelled(true);
 				}
 				// Player
@@ -76,7 +81,7 @@ public class ItemNope extends Module {
 				String extra = "";
 				if (event.isCancelled())
 					extra = "(CANCELLED) ";
-				p.getLogger().info(extra + itemName + " has been thrown by " + responsible);
+				plugin.getLogger().info(extra + itemName + " has been thrown by " + responsible);
 			}
 		}
 	}
