@@ -17,6 +17,7 @@ public enum Modules {
     RACE_MODE(RaceMode::new),
     FLIGHT(Flight::new),
     ENCHANT(Enchant::new),
+    INFINITE_ITEM(InfiniteItem::new),
     ;
 
     private final Function<BrohoofPlusPlugin, Module> constructor;

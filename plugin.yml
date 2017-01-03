@@ -142,6 +142,9 @@ commands:
     lightdebug:
       descrption: Toggles debug
       usage: /lightdebug
+    inf:
+      description: Toggles infinite items
+      usage: /inf [clear]
 permissions:
     brohoofplus.admin:
       description: Allows usage of /BrohoofPlus
