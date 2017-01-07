@@ -46,3 +46,6 @@ processResources {
 		exclude 'plugin.yml'
 	}
 }
+jar {
+	baseName 'BrohoofPlus'
+}
