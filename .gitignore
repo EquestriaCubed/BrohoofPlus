@@ -61,5 +61,10 @@ local.properties
 .loadpath
 *.class
 
-#IntelliJ
+#Gradle
 .idea/
+gradle/
+.gradle/
+gradlew
+gradlew.bat
+build/

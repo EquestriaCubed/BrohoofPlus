@@ -3,7 +3,7 @@ author: SweetieBelle
 authors: [Hepolite, JoyJoy, Ha3]
 main: com.brohoof.brohoofplus.bukkit.BrohoofPlusPlugin
 softdepend: [Herochat, LightAPI, WorldEdit]
-version: 21
+version: $version
 description: >
             General functionality for brohoof stuff that doesn't seem
             big enough to have it's own plugin, but would be nice to 

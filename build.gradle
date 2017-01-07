@@ -1,0 +1,48 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+}
+
+group = 'com.brohoof'
+version = '21'
+
+repositories {
+	jcenter()
+	maven {
+		name 'spigot'
+		url 'https://hub.spigotmc.org/nexus/content/groups/public/'
+	}
+	maven {
+		name 'sk89q'
+		url 'https://maven.sk89q.com/repo'
+	}
+	maven {
+		name 'vault-repo'
+		url 'http://nexus.hc.to/content/repositories/pub_releases'
+	}
+	maven {
+		name 'vanish'
+		url 'http://repo.kitteh.org/content/repositories/releases/'
+	}
+}
+dependencies {
+	compile 'org.bukkit:bukkit:1.11-R0.1-SNAPSHOT'
+	compile 'org.apache.logging.log4j:log4j-api:2.0-beta9'
+	compile 'net.milkbowl.vault:VaultAPI:1.6'
+	compile 'com.sk89q.worldedit:worldedit-bukkit:6.1.5'
+	compile 'com.sk89q.worldedit:worldedit-core:6.1.4-SNAPSHOT'
+	compile ('org.kitteh:VanishNoPacket:3.9'){transitive=false}
+	compile files('../.libraries/LightAPI-3.2.4.jar')
+	compile files('../.libraries/Herochat-5.7.0.jar')
+}
+
+processResources {
+	inputs.properties version: project.version
+	from (sourceSets.main.resources.srcDirs) {
+		include 'plugin.yml'
+		expand version:project.version
+	}
+	from (sourceSets.main.resources.srcDirs) {
+		exclude 'plugin.yml'
+	}
+}
