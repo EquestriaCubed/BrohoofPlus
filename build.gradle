@@ -45,7 +45,8 @@ processResources {
 	from (sourceSets.main.resources.srcDirs) {
 		exclude 'plugin.yml'
 	}
-}
-jar {
-	baseName 'BrohoofPlus'
+	from ('bin/') {
+		exclude 'config.yml'
+		exclude 'plugin.yml'
+	}
 }
