@@ -105,7 +105,7 @@ public class RaceMode extends Module {
 		penaltyTime = plugin.getConfig().getInt("modules.racemode.penaltytime");
 		penaltyStrength = plugin.getConfig().getInt("modules.racemode.penaltystrength");
 		showMessageOnPenalty = plugin.getConfig().getBoolean("modules.racemode.sendmessageonpenalty");
-		messageOnPenalty = plugin.getConfig().getString("modules.racemode.messageonpenalty").replace('&', '�');
+		messageOnPenalty = plugin.getConfig().getString("modules.racemode.messageonpenalty").replace('&', ChatColor.COLOR_CHAR);
 		for (final Player ply : plugin.getServer().getOnlinePlayers()) {
 			ply.setExp(0f);
 			ply.setLevel(maxLevel);
