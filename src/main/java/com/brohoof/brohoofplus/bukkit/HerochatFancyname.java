@@ -2,7 +2,6 @@ package com.brohoof.brohoofplus.bukkit;
 
 import com.dthielke.Herochat;
 import com.dthielke.api.event.ChannelChatEvent;
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -36,23 +35,21 @@ public class HerochatFancyname extends Module {
 
     @Override
     public boolean onCommand(final CommandSender pSender, final Command command, final String label, final String[] pArgs) {
-        if (pArgs.length == 0)
-            return false;
         if (pSender instanceof Player) {
             final Player p = (Player) pSender;
-            if (pArgs.length == 1) {
+            if (pArgs.length == 0) {
                 remove(p);
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now normal.");
                 return true;
             }
-            if(pArgs[2].equalsIgnoreCase("rainbow")) {
+            if(pArgs[1].equalsIgnoreCase("rainbow")) {
                 String nameToDisplay = BrohoofPlusPlugin.rainbowify(p.getName());
                 add(p, nameToDisplay);
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now displayed as " + nameToDisplay);
                 return true;
             }
             ArrayList<ChatColor> colors = new ArrayList<ChatColor>(0);
-            for (String str : (String[]) ArrayUtils.subarray(pArgs, 1, pArgs.length)) {
+            for (String str : pArgs) {
                 if (str.toCharArray()[0] != '&' || str.length() != 2) {
                     pSender.sendMessage(BrohoofPlusPlugin.BHP + "It doesn't look like " + str + " is a colour code, so we won't use it.");
                     continue;
