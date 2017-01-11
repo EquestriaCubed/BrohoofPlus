@@ -62,13 +62,16 @@ public class BrohoofPlusPlugin extends JavaPlugin {
 		return false;
 	}
 
-	private static String rainbowify(String string) {
-
-        Iterator<ChatColor> cycle = Iterators.cycle(RED, GOLD, YELLOW, GREEN, DARK_AQUA, BLUE, DARK_PURPLE);
+	public static String rainbowify(String string) {
+        return colorize(string, RED, GOLD, YELLOW, GREEN, DARK_AQUA, BLUE, DARK_PURPLE);
+    }
+	
+	public static String colorize(String string, ChatColor... color) {
+        Iterator<ChatColor> cycle = Iterators.cycle(color);
         StringBuilder sb = new StringBuilder();
         for (char c : string.toCharArray()) {
             sb.append(cycle.next()).append(c);
         }
         return sb.append(WHITE).toString();
-    }
+	}
 }
