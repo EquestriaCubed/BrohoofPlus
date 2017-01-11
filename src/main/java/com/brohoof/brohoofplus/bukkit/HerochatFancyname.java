@@ -42,7 +42,7 @@ public class HerochatFancyname extends Module {
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now normal.");
                 return true;
             }
-            if(pArgs[1].equalsIgnoreCase("rainbow")) {
+            if(pArgs[0].equalsIgnoreCase("rainbow")) {
                 String nameToDisplay = BrohoofPlusPlugin.rainbowify(p.getName());
                 add(p, nameToDisplay);
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now displayed as " + nameToDisplay);
@@ -55,7 +55,6 @@ public class HerochatFancyname extends Module {
                     continue;
                 }
                 colors.add(ChatColor.getByChar(str.charAt(1)));
-                return false;
             }
             String nameToDisplay = BrohoofPlusPlugin.colorize(p.getName(), colors.toArray(new ChatColor[0]));
             add(p, nameToDisplay);
