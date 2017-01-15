@@ -20,9 +20,9 @@ import java.io.IOException;
 
 public class Mount extends Module {
 
-	public Mount(final BrohoofPlusPlugin brohoofPlusPlugin) {
-		super(brohoofPlusPlugin, "mount", "unmount", "mounttoggle");
-	}
+    public Mount(final BrohoofPlusPlugin brohoofPlusPlugin) {
+        super(brohoofPlusPlugin, "mount", "unmount", "mounttoggle");
+    }
 
     @Override
     public Listener createListener() {
@@ -73,7 +73,7 @@ public class Mount extends Module {
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
-                pSender.sendMessage(BrohoofPlusPlugin.BHP + "�cAn internal error occured. Please contact an admin.");
+                pSender.sendMessage(BrohoofPlusPlugin.BHP + ChatColor.RED + "An internal error occured. Please contact an admin.");
                 return true;
             }
         }
