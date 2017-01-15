@@ -11,28 +11,27 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class FirstJoined extends Module {
 
-	public FirstJoined(final BrohoofPlusPlugin plugin) {
-		super(plugin);
-	}
+    public FirstJoined(final BrohoofPlusPlugin plugin) {
+        super(plugin);
+    }
 
-	@Override
-	protected Listener createListener() {
-		return new FirstJoinedListener();
-	}
+    @Override
+    protected Listener createListener() {
+        return new FirstJoinedListener();
+    }
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	public class FirstJoinedListener implements Listener {
-		@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
-		public void playerWorldChange(PlayerTeleportEvent e) {
-			if (e.getFrom().getWorld().getName().equals(plugin.getConfig().getString("modules.firstjoined.from")) && e.getTo().getWorld().getName().equals(plugin.getConfig().getString("modules.firstjoined.to"))) {
-				Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " has joined for the first time!");
-			}
-		}
-	}
+    public class FirstJoinedListener implements Listener {
+        @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+        public void playerWorldChange(final PlayerTeleportEvent e) {
+            if (e.getFrom().getWorld().getName().equals(plugin.getConfig().getString("modules.firstjoined.from")) && e.getTo().getWorld().getName().equals(plugin.getConfig().getString("modules.firstjoined.to")))
+                Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " has joined for the first time!");
+        }
+    }
 
 }

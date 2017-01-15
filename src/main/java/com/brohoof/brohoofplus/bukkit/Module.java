@@ -8,28 +8,28 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class Module implements CommandExecutor {
 
-	protected BrohoofPlusPlugin plugin;
+    protected BrohoofPlusPlugin plugin;
 
-	public Module(BrohoofPlusPlugin plugin, String... commands) {
-		this.plugin = plugin;
-		registerCommands(commands);
-		Listener listener = createListener();
-		if (listener != null)
-			registerEvents(listener, plugin);
-	}
+    public Module(final BrohoofPlusPlugin plugin, final String... commands) {
+        this.plugin = plugin;
+        registerCommands(commands);
+        final Listener listener = createListener();
+        if (listener != null)
+            registerEvents(listener, plugin);
+    }
 
-	private void registerCommands(String[] commands) {
-		for (final String command : commands) 
-			plugin.getCommand(command).setExecutor(this);
-	}
+    private void registerCommands(final String[] commands) {
+        for (final String command : commands)
+            plugin.getCommand(command).setExecutor(this);
+    }
 
-	private void registerEvents(Listener listener, JavaPlugin plugin) {
-		plugin.getServer().getPluginManager().registerEvents(listener, plugin);
-	}
+    private void registerEvents(final Listener listener, final JavaPlugin plugin) {
+        plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+    }
 
-	@Nullable
-	protected Listener createListener() {
-		return null;
-	}
+    @Nullable
+    protected Listener createListener() {
+        return null;
+    }
 
 }

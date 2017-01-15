@@ -1,7 +1,8 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import com.dthielke.Herochat;
-import com.dthielke.api.event.ChannelChatEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,8 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.dthielke.Herochat;
+import com.dthielke.api.event.ChannelChatEvent;
 
 public class HerochatFancyname extends Module {
     private final HashMap<Player, String> enabledUsers = new HashMap<Player, String>(0);
@@ -42,21 +43,21 @@ public class HerochatFancyname extends Module {
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now normal.");
                 return true;
             }
-            if(pArgs[0].equalsIgnoreCase("rainbow")) {
-                String nameToDisplay = BrohoofPlusPlugin.rainbowify(p.getName());
+            if (pArgs[0].equalsIgnoreCase("rainbow")) {
+                final String nameToDisplay = BrohoofPlusPlugin.rainbowify(p.getName());
                 add(p, nameToDisplay);
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now displayed as " + nameToDisplay);
                 return true;
             }
-            ArrayList<ChatColor> colors = new ArrayList<ChatColor>(0);
-            for (String str : pArgs) {
+            final ArrayList<ChatColor> colors = new ArrayList<ChatColor>(0);
+            for (final String str : pArgs) {
                 if (str.toCharArray()[0] != '&' || str.length() != 2) {
                     pSender.sendMessage(BrohoofPlusPlugin.BHP + "It doesn't look like " + str + " is a colour code, so we won't use it.");
                     continue;
                 }
                 colors.add(ChatColor.getByChar(str.charAt(1)));
             }
-            String nameToDisplay = BrohoofPlusPlugin.colorize(p.getName(), colors.toArray(new ChatColor[0]));
+            final String nameToDisplay = BrohoofPlusPlugin.colorize(p.getName(), colors.toArray(new ChatColor[0]));
             add(p, nameToDisplay);
             pSender.sendMessage(BrohoofPlusPlugin.BHP + "Your name is now displayed as " + nameToDisplay);
             return true;

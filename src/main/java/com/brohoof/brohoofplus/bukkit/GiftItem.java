@@ -1,5 +1,8 @@
 package com.brohoof.brohoofplus.bukkit;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -7,13 +10,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class GiftItem extends Module {
 
     public GiftItem(final BrohoofPlusPlugin p) {
-    	super(p, "giftitem", "giftunique", "copyitem");
+        super(p, "giftitem", "giftunique", "copyitem");
     }
 
     @Override
@@ -25,7 +25,7 @@ public class GiftItem extends Module {
         if (command.getName().equalsIgnoreCase("copyitem")) {
             int count;
             final Player target = (Player) pSender;
-            if(pArgs.length == 0)
+            if (pArgs.length == 0)
                 return false;
             try {
                 count = Integer.parseInt(pArgs[0]);
@@ -56,11 +56,11 @@ public class GiftItem extends Module {
                 targetPlayerName = pArgs[0];
                 switch (pArgs[1]) {
                     case "anonymous": {
-						anonymous = true;
-						break;
+                        anonymous = true;
+                        break;
                     }
-						
-					case "quiet": {
+
+                    case "quiet": {
                         quiet = true;
                         break;
                     }
@@ -84,15 +84,13 @@ public class GiftItem extends Module {
             pSender.sendMessage("Sending gift to all players...");
             plugin.getLogger().info(pSender.getName() + " is sending a gift to all players (" + item.getType().toString() + ")");
         } else
-            for (final Player p : Bukkit.getOnlinePlayers()) {
+            for (final Player p : Bukkit.getOnlinePlayers())
                 if (p.getName().toLowerCase().equalsIgnoreCase(targetPlayerName)) {
                     receipients.add(p);
                     pSender.sendMessage("Sending gift to " + p.getName() + "...");
-                    this.plugin.getLogger().info(pSender.getName() + " is sending a gift to " + p.getName() + " (" + item.getType().toString() + ")");
+                    plugin.getLogger().info(pSender.getName() + " is sending a gift to " + p.getName() + " (" + item.getType().toString() + ")");
                     break;
                 }
-
-            }
         if (receipients.size() == 0) {
             pSender.sendMessage("Player " + targetPlayerName + " not found.");
             return true;

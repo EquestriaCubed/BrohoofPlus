@@ -10,30 +10,30 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Flight extends Module {
 
-	public Flight(BrohoofPlusPlugin p) {
-		super(p, "fly");
-	}
+    public Flight(final BrohoofPlusPlugin p) {
+        super(p, "fly");
+    }
 
-	@Override
-	protected Listener createListener() {
-		return new FlightListener();
-	}
+    @Override
+    protected Listener createListener() {
+        return new FlightListener();
+    }
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (sender instanceof Player) {
-			final Player p = (Player) sender;
-			p.setAllowFlight(!p.getAllowFlight());
-			p.sendMessage(p.getAllowFlight() ? BrohoofPlusPlugin.BHP + "You are now flying again." : BrohoofPlusPlugin.BHP + "You are no longer flying.");
-			return true;
-		}
-		sender.sendMessage("Only player command, bad console admin.");
-		return true;
-	}
-	
-	public class FlightListener implements Listener {
+    @Override
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        if (sender instanceof Player) {
+            final Player p = (Player) sender;
+            p.setAllowFlight(!p.getAllowFlight());
+            p.sendMessage(p.getAllowFlight() ? BrohoofPlusPlugin.BHP + "You are now flying again." : BrohoofPlusPlugin.BHP + "You are no longer flying.");
+            return true;
+        }
+        sender.sendMessage("Only player command, bad console admin.");
+        return true;
+    }
+
+    public class FlightListener implements Listener {
         @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-        public void playerJoin(PlayerJoinEvent p) {
+        public void playerJoin(final PlayerJoinEvent p) {
             p.getPlayer().setAllowFlight(true);
         }
     }

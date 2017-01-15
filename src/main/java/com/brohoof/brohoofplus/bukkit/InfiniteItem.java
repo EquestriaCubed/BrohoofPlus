@@ -1,7 +1,7 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -13,16 +13,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 
 /**
  * @author killjoy1221
  */
 public class InfiniteItem extends Module {
 
-    private Multimap<UUID, ItemStack> infiniteItems = ArrayListMultimap.create();
+    private final Multimap<UUID, ItemStack> infiniteItems = ArrayListMultimap.create();
 
-    public InfiniteItem(BrohoofPlusPlugin p) {
+    public InfiniteItem(final BrohoofPlusPlugin p) {
         super(p, "inf");
     }
 
@@ -32,26 +33,24 @@ public class InfiniteItem extends Module {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(final CommandSender commandSender, final Command command, final String s, final String[] strings) {
         if (commandSender instanceof Player) {
-            Player player = (Player) commandSender;
+            final Player player = (Player) commandSender;
             if (strings.length == 0) {
                 // add or remove the current item
-                ItemStack item = player.getInventory().getItemInMainHand();
-                if (item == null || item.getType() == Material.AIR) {
+                final ItemStack item = player.getInventory().getItemInMainHand();
+                if (item == null || item.getType() == Material.AIR)
                     player.sendMessage("Select an item to make it an infinite stack.");
-                } else if (!item.getType().isBlock()) {
+                else if (!item.getType().isBlock())
                     player.sendMessage("Only blocks can be infinite. Select a block.");
-                } else if (item.getMaxStackSize() == 1) {
+                else if (item.getMaxStackSize() == 1)
                     player.sendMessage("This item is not stackable. You cannot have an infinite stack of it.");
-                } else {
+                else {
                     // try to find the itemstack first
                     ItemStack toRemove = null;
-                    for (ItemStack stack : infiniteItems.get(player.getUniqueId())) {
-                        if (item.isSimilar(stack)) {
+                    for (final ItemStack stack : infiniteItems.get(player.getUniqueId()))
+                        if (item.isSimilar(stack))
                             toRemove = stack;
-                        }
-                    }
                     if (toRemove == null) {
                         // add if not there
                         infiniteItems.put(player.getUniqueId(), item.clone());
@@ -68,9 +67,8 @@ public class InfiniteItem extends Module {
                 infiniteItems.removeAll(player.getUniqueId());
                 player.sendMessage("All infinite stacks removed");
 
-            } else {
+            } else
                 return false;
-            }
         } else {
             commandSender.sendMessage("Console cannot use this command.");
             return false;
@@ -81,9 +79,9 @@ public class InfiniteItem extends Module {
     private class ItemListener implements Listener {
 
         @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-        public void replenishItems(BlockPlaceEvent event) {
+        public void replenishItems(final BlockPlaceEvent event) {
             final Player player = event.getPlayer();
-            for (ItemStack item : infiniteItems.get(player.getUniqueId())) {
+            for (final ItemStack item : infiniteItems.get(player.getUniqueId()))
                 if (item.isSimilar(event.getItemInHand())) {
                     final ItemStack stack = item.clone();
                     stack.setAmount(1);
@@ -91,7 +89,6 @@ public class InfiniteItem extends Module {
                     Bukkit.getScheduler().runTask(plugin, () -> player.getInventory().addItem(stack));
                     return;
                 }
-            }
         }
     }
 }

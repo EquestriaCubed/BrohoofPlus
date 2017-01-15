@@ -1,6 +1,8 @@
 package com.brohoof.brohoofplus.bukkit;
 
-import com.google.common.base.Joiner;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -11,13 +13,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Joiner;
 
 public class Lore extends Module {
 
     public Lore(final BrohoofPlusPlugin p) {
-    	super(p, "lore_add", "lore_name", "lore_reset", "lore_repair", "lore_color");
+        super(p, "lore_add", "lore_name", "lore_reset", "lore_repair", "lore_color");
     }
 
     @Override

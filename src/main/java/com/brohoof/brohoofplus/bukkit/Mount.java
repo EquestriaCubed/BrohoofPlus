@@ -1,5 +1,8 @@
 package com.brohoof.brohoofplus.bukkit;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -14,9 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Mount extends Module {
 
@@ -41,13 +41,12 @@ public class Mount extends Module {
             pSender.sendMessage(BrohoofPlusPlugin.BHP + "Players only.");
             return true;
         }
-        if (command.getName().equalsIgnoreCase("mounttoggle")) {
+        if (command.getName().equalsIgnoreCase("mounttoggle"))
             try {
-                File mountFile = new File(plugin.getDataFolder(), "mountpref.yml");
-                if (!mountFile.exists()) {
+                final File mountFile = new File(plugin.getDataFolder(), "mountpref.yml");
+                if (!mountFile.exists())
                     mountFile.createNewFile();
-                }
-                FileConfiguration config = YamlConfiguration.loadConfiguration(mountFile);
+                final FileConfiguration config = YamlConfiguration.loadConfiguration(mountFile);
                 // mounttoggle
                 if (pSender instanceof Player) {
                     final Player sender = (Player) pSender;
@@ -71,12 +70,11 @@ public class Mount extends Module {
                 }
                 pSender.sendMessage("Players only.");
                 return true;
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
                 pSender.sendMessage(BrohoofPlusPlugin.BHP + ChatColor.RED + "An internal error occured. Please contact an admin.");
                 return true;
             }
-        }
         if (command.getName().equalsIgnoreCase("unmount")) {
             // unmount
             if (pSender instanceof Player) {
@@ -123,10 +121,10 @@ public class Mount extends Module {
                             plugin.getLogger().info(clicker.getName() + " mounted a " + clicked.getType().getName());
                         // clicked.setPassenger(clicker);
                         boolean success = false;
-                        String errorPrefix = BrohoofPlusPlugin.BHP + ChatColor.RED;
+                        final String errorPrefix = BrohoofPlusPlugin.BHP + ChatColor.RED;
                         try {
                             success = clicked.setPassenger(clicker);
-                        } catch (Throwable e) {
+                        } catch (final Throwable e) {
                             clicker.sendMessage(errorPrefix + "An error occured while mounting " + clicked.getName() + "!");
                             if (e instanceof IllegalStateException)
                                 clicker.sendMessage(errorPrefix + "This error occured due to circular entity riding. Whatever you were trying to mount is actually riding you! You cannot see this entity due to a bug in Minecraft, and cannot be fixed on the Server.");
@@ -146,7 +144,7 @@ public class Mount extends Module {
         }
 
         @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-        public void onPlayerLeave(PlayerQuitEvent event) {
+        public void onPlayerLeave(final PlayerQuitEvent event) {
             final Player p = event.getPlayer();
             p.eject();
             final Entity vehicle = p.getVehicle();

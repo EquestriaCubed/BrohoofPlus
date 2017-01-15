@@ -13,63 +13,63 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class BlockPotionsAndArrows extends Module {
-	public BlockPotionsAndArrows(BrohoofPlusPlugin p) {
-		super(p);
-	}
+    public BlockPotionsAndArrows(final BrohoofPlusPlugin p) {
+        super(p);
+    }
 
-	@Override
-	protected Listener createListener() {
-		return new BlockPotionsndArrowsListener();
-	}
+    @Override
+    protected Listener createListener() {
+        return new BlockPotionsndArrowsListener();
+    }
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		// There are no commands for this class.
-		return false;
-	}
+    @Override
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        // There are no commands for this class.
+        return false;
+    }
 
-	public class BlockPotionsndArrowsListener implements Listener {
+    public class BlockPotionsndArrowsListener implements Listener {
 
-		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-		public void onPotionSplashEvent(PotionSplashEvent e) {
-			e.setCancelled(true);
-			e.getEntity().sendMessage(ChatColor.DARK_RED + "Sorry, this action is disallowed.");
-		}
+        @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+        public void onPotionSplashEvent(final PotionSplashEvent e) {
+            e.setCancelled(true);
+            e.getEntity().sendMessage(ChatColor.DARK_RED + "Sorry, this action is disallowed.");
+        }
 
-		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-		public void onBannedItemUse(PlayerInteractEvent e) {
-			if (e.getPlayer().hasPermission("brohoofplus.bypasspotions"))
-				return;
-			switch (e.getMaterial()) {
-				// To ban, or not to ban?
-				// case SPECTRAL_ARROW:
-				case TIPPED_ARROW:
-				case POTION:
-				case LINGERING_POTION:
-				case SPLASH_POTION:
-				case EXP_BOTTLE: {
-					e.setCancelled(true);
-					e.getPlayer().sendMessage(ChatColor.DARK_RED + "Sorry, this item is disallowed.");
-					break;
-				}
-				default:
-					break;
-			}
-		}
+        @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+        public void onBannedItemUse(final PlayerInteractEvent e) {
+            if (e.getPlayer().hasPermission("brohoofplus.bypasspotions"))
+                return;
+            switch (e.getMaterial()) {
+                // To ban, or not to ban?
+                // case SPECTRAL_ARROW:
+                case TIPPED_ARROW:
+                case POTION:
+                case LINGERING_POTION:
+                case SPLASH_POTION:
+                case EXP_BOTTLE: {
+                    e.setCancelled(true);
+                    e.getPlayer().sendMessage(ChatColor.DARK_RED + "Sorry, this item is disallowed.");
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
 
-		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-		public void onLingeringPotionSplashEvent(LingeringPotionSplashEvent e) {
-			e.setCancelled(true);
-			e.getEntity().sendMessage(ChatColor.DARK_RED + "Sorry, this action is disallowed.");
-		}
+        @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+        public void onLingeringPotionSplashEvent(final LingeringPotionSplashEvent e) {
+            e.setCancelled(true);
+            e.getEntity().sendMessage(ChatColor.DARK_RED + "Sorry, this action is disallowed.");
+        }
 
-		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-		public void onEntityShootBowEvent(EntityShootBowEvent e) {
-			if (e.getProjectile() instanceof TippedArrow) {
-				e.setCancelled(true);
-				e.getEntity().sendMessage(ChatColor.DARK_RED + "Sorry, this action is disallowed.");
-			}
-		}
-	}
+        @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+        public void onEntityShootBowEvent(final EntityShootBowEvent e) {
+            if (e.getProjectile() instanceof TippedArrow) {
+                e.setCancelled(true);
+                e.getEntity().sendMessage(ChatColor.DARK_RED + "Sorry, this action is disallowed.");
+            }
+        }
+    }
 
 }
