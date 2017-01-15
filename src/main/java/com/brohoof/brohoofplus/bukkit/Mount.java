@@ -103,6 +103,11 @@ public class Mount extends Module {
 			switch (clicked.getType()) {
 				case HORSE:
 				case PIG:
+				case LLAMA:
+				case MULE:
+				case SKELETON_HORSE:
+				case UNKNOWN:
+				case ZOMBIE_HORSE:
 					return;
 				default:
 					break;
