@@ -126,7 +126,7 @@ public class Mount extends Module {
                         String errorPrefix = BrohoofPlusPlugin.BHP + ChatColor.RED;
                         try {
                             success = clicked.setPassenger(clicker);
-                        } catch (Exception e) {
+                        } catch (Throwable e) {
                             clicker.sendMessage(errorPrefix + "An error occured while mounting " + clicked.getName() + "!");
                             if (e instanceof IllegalStateException)
                                 clicker.sendMessage(errorPrefix + "This error occured due to circular entity riding. Whatever you were trying to mount is actually riding you! You cannot see this entity due to a bug in Minecraft, and cannot be fixed on the Server.");
