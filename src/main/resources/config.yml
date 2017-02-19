@@ -47,3 +47,5 @@ modules:
     enabled: true
   infiniteitem:
     enabled: true
+  blockeventsbeingfiredtwice:
+    enabled: true
