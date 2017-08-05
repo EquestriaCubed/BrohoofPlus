@@ -16,6 +16,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class Mount extends Module {
@@ -96,6 +97,8 @@ public class Mount extends Module {
         @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
         public void onMountEvent(final PlayerInteractEntityEvent pEvent) {
             final Player clicker = pEvent.getPlayer();
+            if(!pEvent.getHand().equals(EquipmentSlot.HAND))
+                return;
             if (clicker.getInventory().getItemInMainHand() == null)
                 return;
             final Entity clicked = pEvent.getRightClicked();

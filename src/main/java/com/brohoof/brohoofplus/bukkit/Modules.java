@@ -17,8 +17,7 @@ public enum Modules {
     RACE_MODE(RaceMode::new),
     FLIGHT(Flight::new),
     ENCHANT(Enchant::new),
-    INFINITE_ITEM(InfiniteItem::new),
-    BLOCK_EVENTS_BEING_FIRED_TWICE(BlockEventsBeingFiredTwice::new);
+    INFINITE_ITEM(InfiniteItem::new);
     // @formatter:on
 
     private final Function<BrohoofPlusPlugin, Module> constructor;
