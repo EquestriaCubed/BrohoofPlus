@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.brohoof'
-version = '25'
+version = '26'
 
 repositories {
 	jcenter()
