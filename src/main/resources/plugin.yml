@@ -70,6 +70,9 @@ commands:
     unmount:
       description: Unmounts whoever you are riding, and wheover is riding you.
       usage: /unmount
+    removeghostparrots:
+      description: Removes any parrots attached to you. Whether they are there or not.
+      usage: /removeghostparrots
     exploit:
       description: Runs when someone calls an exploit command.
       usage: /exploit

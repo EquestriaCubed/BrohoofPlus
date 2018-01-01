@@ -22,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
 public class Mount extends Module {
 
     public Mount(final BrohoofPlusPlugin brohoofPlusPlugin) {
-        super(brohoofPlusPlugin, "mount", "unmount", "mounttoggle");
+        super(brohoofPlusPlugin, "mount", "unmount", "mounttoggle", "removeghostparrots");
     }
 
     @Override
@@ -30,6 +30,7 @@ public class Mount extends Module {
         return new MountEvent();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onCommand(final CommandSender pSender, final Command command, final String label, final String[] pArgs) {
         if (command.getName().equalsIgnoreCase("mount")) {
@@ -84,6 +85,17 @@ public class Mount extends Module {
                 final Entity vehicle = sender.getVehicle();
                 if (vehicle != null)
                     vehicle.eject();
+                return true;
+            }
+            pSender.sendMessage("Players only.");
+            return true;
+        }
+        if (command.getName().equalsIgnoreCase("removeghostparrots")) {
+            // unmount
+            if (pSender instanceof Player) {
+                final Player sender = (Player) pSender;
+                sender.setShoulderEntityLeft(null);
+                sender.setShoulderEntityRight(null);
                 return true;
             }
             pSender.sendMessage("Players only.");
