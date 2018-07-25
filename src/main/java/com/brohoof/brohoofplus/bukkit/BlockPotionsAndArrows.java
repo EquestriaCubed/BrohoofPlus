@@ -47,7 +47,7 @@ public class BlockPotionsAndArrows extends Module {
                 case POTION:
                 case LINGERING_POTION:
                 case SPLASH_POTION:
-                case EXP_BOTTLE: {
+                case EXPERIENCE_BOTTLE: {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(ChatColor.DARK_RED + "Sorry, this item is disallowed.");
                     break;
