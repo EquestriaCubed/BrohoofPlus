@@ -71,6 +71,8 @@ public class Enchant extends Module {
                 return Enchantment.ARROW_INFINITE;
             if (enchant.equalsIgnoreCase("ARROW_KNOCKBACK") || enchant.equalsIgnoreCase("Punch"))
                 return Enchantment.ARROW_KNOCKBACK;
+            if (enchant.equalsIgnoreCase("BINDING_CURSE") || enchant.equalsIgnoreCase("Curse of Binding") || enchant.equalsIgnoreCase("curse_of_binding"))
+                return Enchantment.BINDING_CURSE;
             if (enchant.equalsIgnoreCase("DAMAGE_ALL") || enchant.equalsIgnoreCase("Sharpness"))
                 return Enchantment.DAMAGE_ALL;
             if (enchant.equalsIgnoreCase("DAMAGE_ARTHROPODS") || enchant.equalsIgnoreCase("Bane of Arthropods") || enchant.equalsIgnoreCase("bane_of_arthropods"))
@@ -79,16 +81,14 @@ public class Enchant extends Module {
                 return Enchantment.DAMAGE_UNDEAD;
             if (enchant.equalsIgnoreCase("DEPTH_STRIDER") || enchant.equalsIgnoreCase("Depth Strider"))
                 return Enchantment.DEPTH_STRIDER;
-            if (enchant.equalsIgnoreCase("FROST_WALKER") || enchant.equalsIgnoreCase("Frost Walker"))
-                return Enchantment.FROST_WALKER;
-            if (enchant.equalsIgnoreCase("BINDING_CURSE") || enchant.equalsIgnoreCase("Curse of Binding") || enchant.equalsIgnoreCase("curse_of_binding"))
-                return Enchantment.BINDING_CURSE;
             if (enchant.equalsIgnoreCase("DIG_SPEED") || enchant.equalsIgnoreCase("Efficiency"))
                 return Enchantment.DIG_SPEED;
             if (enchant.equalsIgnoreCase("DURABILITY") || enchant.equalsIgnoreCase("Unbreaking"))
                 return Enchantment.DURABILITY;
             if (enchant.equalsIgnoreCase("FIRE_ASPECT") || enchant.equalsIgnoreCase("Fire Aspect"))
                 return Enchantment.FIRE_ASPECT;
+            if (enchant.equalsIgnoreCase("FROST_WALKER") || enchant.equalsIgnoreCase("Frost Walker"))
+                return Enchantment.FROST_WALKER;
             if (enchant.equalsIgnoreCase("KNOCKBACK"))
                 return Enchantment.KNOCKBACK;
             if (enchant.equalsIgnoreCase("LOOT_BONUS_BLOCKS") || enchant.equalsIgnoreCase("Fortune"))
@@ -97,6 +97,8 @@ public class Enchant extends Module {
                 return Enchantment.LOOT_BONUS_MOBS;
             if (enchant.equalsIgnoreCase("LUCK") || enchant.equalsIgnoreCase("Luck of the Sea") || enchant.equalsIgnoreCase("luck_of_the_sea"))
                 return Enchantment.LUCK;
+            if (enchant.equalsIgnoreCase("MENDING"))
+                return Enchantment.MENDING;
             if (enchant.equalsIgnoreCase("OXYGEN") || enchant.equalsIgnoreCase("Respiration"))
                 return Enchantment.OXYGEN;
             if (enchant.equalsIgnoreCase("PROTECTION_ENVIRONMENTAL") || enchant.equalsIgnoreCase("Protection"))
@@ -115,8 +117,7 @@ public class Enchant extends Module {
                 return Enchantment.THORNS;
             if (enchant.equalsIgnoreCase("WATER_WORKER") || enchant.equalsIgnoreCase("Aqua Affinity") || enchant.equalsIgnoreCase("aqua_affinity"))
                 return Enchantment.WATER_WORKER;
-            if (enchant.equalsIgnoreCase("MENDING"))
-                return Enchantment.MENDING;
+
             if (enchant.equalsIgnoreCase("VANISHING_CURSE") || enchant.equalsIgnoreCase("Curse of Vanishing") || enchant.equalsIgnoreCase("curse_of_vanishing"))
                 return Enchantment.VANISHING_CURSE;
             return null;
